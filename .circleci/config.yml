@@ -63,7 +63,7 @@ jobs:
           at: /tmp/dir
       - run:
           name: "Read file"
-          command: "cat abc.txt"
+          command: "cat /tmp/dir/abc.txt"
       
 
 # Orchestrate jobs using workflows
