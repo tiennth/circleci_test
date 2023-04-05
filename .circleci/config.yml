@@ -39,14 +39,40 @@ jobs:
           name: "Print World"
           command: "echo 'World'"
   
+  store-files:
+    docker:
+      - image: cimg/base:stable
+
+    steps:
+      - checkout
+      - run:
+          name: "Store file"
+          command: "echo 'Hello there' > abc.txt"
+      - persist_to_workspace:
+          root: /tmp/dir
+          paths:
+            - "abc.txt"
+
+  read-files:
+    docker:
+      - image: cimg/base:stable
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/dir
+      - run:
+          name: "Read file"
+          command: "cat abc.txt"
+      
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - print-hello
-      - print-world:
+      - store-files
+      - read-files:
           requires:
-            - print-hello
+            - store-files
 
