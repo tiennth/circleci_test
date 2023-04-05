@@ -67,9 +67,14 @@ jobs:
       - print_pipeline_id
       - attach_workspace:
           at: ~/
+      - run: return 1
       - run:
           name: "Read file"
           command: "cat ~/abc.txt"
+      - run:
+          name: "rollback on failure"
+          command: "echo 'Rollback completed'"
+          when: on_fail
       
 
 # Orchestrate jobs using workflows
