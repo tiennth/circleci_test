@@ -47,9 +47,9 @@ jobs:
       - checkout
       - run:
           name: "Store file"
-          command: "echo 'Hello there' > abc.txt"
+          command: "echo 'Hello there' > ~/abc.txt"
       - persist_to_workspace:
-          root: /tmp/dir
+          root: ~/
           paths:
             - "abc.txt"
 
@@ -60,10 +60,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/dir
+          at: ~/
       - run:
           name: "Read file"
-          command: "cat /tmp/dir/abc.txt"
+          command: "cat ~/abc.txt"
       
 
 # Orchestrate jobs using workflows
