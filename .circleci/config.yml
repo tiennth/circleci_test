@@ -67,7 +67,7 @@ jobs:
       - print_pipeline_id
       - attach_workspace:
           at: ~/
-      - run: return 1
+      - run: exit 1
       - run:
           name: "Read file"
           command: "cat ~/abc.txt"
